@@ -14,6 +14,7 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.IncludeParameters;
 import br.com.caelum.vraptor.validator.Validator;
+import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.view.Results;
 
 @Controller
@@ -46,6 +47,9 @@ public class ContaController {
 
 	@Post("/conta")
 	public void adiciona(@Valid Conta conta) {
+		validator.check(
+				(!contaDao.existeContaCadastrada(conta.getAgencia().trim(), conta.getNumero().trim())), 
+				new I18nMessage("conta", "conta.jaExiste"));
 		validator.onErrorRedirectTo(this).formulario();
 		if(conta.getId() != null) {
 			contaDao.atualizar(conta);
@@ -76,9 +80,14 @@ public class ContaController {
     @Delete("/conta")
     @IncludeParameters
     public void remove(Conta conta){
-    	contaDao.remove(conta);
-    	result.include("mensagem", "Conta removido com sucesso");
-    	result.redirectTo(this).lista();
+	try{
+	   contaDao.remove(conta);
+    	   result.include("mensagem", "Conta removido com sucesso");
+	}catch(Exception e){
+    	   result.include("mensagem", "Error ao remover Conta: " + e);
+	}
+	result.redirectTo(this).lista();
+
     }
 	
 	@Get
