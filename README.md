@@ -34,10 +34,10 @@ Agora vamos ao que interessa, o cadastro de Transferencia
 
 Abaixo as contas já pre-cadastradas no start da app
 Agencia	Numero		
-0001	11111-6			
-0001	44444-6			
-0001	22222-6			
-0001	33333-6		
+0001	11111-6,			
+0001	44444-6	,		
+0001	22222-6	,		
+0001	33333-6	,	
 
 Utilizar uma para conta origem e outra para conta destino, 
 Se a pergunta que vcs gostariam de fazer é se eu validei se pode uma mesma conta cadastrar para ela mesmo a resposta é não eu não validei nada disso, caso seja teimoso pode tentar.
